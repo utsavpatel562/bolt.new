@@ -13,8 +13,8 @@ function Header() {
             <h2 className="font-semibold italic">BOLT</h2>
           </div>
         </Link>
-        <div className="flex gap-3">
-          <Button variant={"ghost"} className={"cursor-pointer"}>
+        <div className="flex gap-2">
+          <Button variant={"ghost"} className={"cursor-pointer bg-zinc-800"}>
             Sign In
           </Button>
           <Button
