@@ -1,13 +1,12 @@
 // Code by Utsav Patel
 
-import { Button } from "@/components/ui/button";
+import Hero from "@/components/customs/Hero";
 
 export default function Home() {
   return (
     <>
     <div className="">
-    <h2>Utsav Patel</h2>
-    <Button>Button</Button>
+      <Hero/>
     </div>
     </>
   );
