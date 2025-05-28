@@ -4,7 +4,16 @@ import Colors from "@/data/Colors";
 import LookUp from "@/data/LookUp";
 import { ArrowRight, Link } from "lucide-react";
 import React, { useContext, useState } from "react";
-
+import { SiAstro } from "react-icons/si";
+import { SiVite } from "react-icons/si";
+import { RiNextjsFill } from "react-icons/ri";
+import { SiNuxtdotjs } from "react-icons/si";
+import { FaVuejs } from "react-icons/fa";
+import { RiSvelteFill } from "react-icons/ri";
+import { SiTypescript } from "react-icons/si";
+import { FaReact } from "react-icons/fa";
+import { SiQwik } from "react-icons/si";
+import { FaAngular } from "react-icons/fa";
 function Hero() {
   const [userInput, setUserInput] = useState();
   const { messages, setMessages } = useContext(MessagesContext);
@@ -16,7 +25,7 @@ function Hero() {
   };
   return (
     <>
-      <div className="flex flex-col items-center mt-24 sm:mt-28 md:mt-32 xl:mt-52 gap-2 px-4 sm:px-6">
+      <div className="flex flex-col items-center mt-24 sm:mt-28 md:mt-32 xl:mt-18 gap-2 px-4 sm:px-6">
         <h2 className="font-bold text-2xl sm:text-3xl md:text-4xl text-center">
           {LookUp.HERO_HEADING}
         </h2>
@@ -56,6 +65,23 @@ function Hero() {
               {suggestion}
             </h2>
           ))}
+        </div>
+        <div className="mt-4 justify-center items-center">
+          <p className="text-gray-400 text-center">
+            or start a blank app with your favorite stack
+          </p>
+          <div className="flex gap-4 mt-5">
+            <SiAstro className="w-8 h-8 text-gray-400 hover:text-blue-300" />
+            <SiVite className="w-8 h-8 text-gray-400 hover:text-blue-300" />
+            <RiNextjsFill className="w-8 h-8 text-gray-400 hover:text-blue-300" />
+            <SiNuxtdotjs className="w-8 h-8 text-gray-400 hover:text-blue-300" />
+            <FaVuejs className="w-8 h-8 text-gray-400 hover:text-blue-300" />
+            <RiSvelteFill className="w-8 h-8 text-gray-400 hover:text-blue-300" />
+            <SiTypescript className="w-8 h-8 text-gray-400 hover:text-blue-300" />
+            <FaReact className="w-8 h-8 text-gray-400 hover:text-blue-300" />
+            <SiQwik className="w-8 h-8 text-gray-400 hover:text-blue-300" />
+            <FaAngular className="w-8 h-8 text-gray-400 hover:text-blue-300" />
+          </div>
         </div>
       </div>
     </>
