@@ -1,2 +1,2 @@
 ### BOLT.NEW CLONE (IN PROGRESS)
-<img src="public/demopic.png" alt="demo"/>
+<img src="public/demo.png" alt="demo"/>
