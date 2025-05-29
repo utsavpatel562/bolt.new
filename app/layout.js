@@ -1,5 +1,6 @@
 import "./globals.css";
 import Provider from "./provider";
+import ConvexClientProvider from "./ConvexClientProvider";
 
 export default function RootLayout({ children }) {
   return (
@@ -9,9 +10,11 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/thunder.png" type="image/png" />
       </head>
       <body>
+        <ConvexClientProvider>
         <Provider>
         {children}
         </Provider>
+        </ConvexClientProvider>
       </body>
     </html>
   );
