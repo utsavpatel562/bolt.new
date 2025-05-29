@@ -8,16 +8,24 @@ import { SiAstro } from "react-icons/si";
 import { SiVite } from "react-icons/si";
 import { RiNextjsFill } from "react-icons/ri";
 import { SiNuxtdotjs } from "react-icons/si";
-import { FaVuejs } from "react-icons/fa";
+import { IoLogoJavascript } from "react-icons/io5";
 import { RiSvelteFill } from "react-icons/ri";
 import { SiTypescript } from "react-icons/si";
 import { FaReact } from "react-icons/fa";
 import { SiQwik } from "react-icons/si";
 import { FaAngular } from "react-icons/fa";
+import { UserDetailContext } from "@/context/UserDetailContext";
+import SignInDialog from "./SignInDialog";
 function Hero() {
   const [userInput, setUserInput] = useState();
   const { messages, setMessages } = useContext(MessagesContext);
+  const { userDetail, setUserDetail } = useContext(UserDetailContext);
+  const [openDialog, setOpenDialog] = useState(false);
   const onGenerate = (input) => {
+    if (!userDetail?.name) {
+      setOpenDialog(true);
+      return;
+    }
     setMessages({
       role: "user",
       content: input,
@@ -25,7 +33,11 @@ function Hero() {
   };
   return (
     <>
-      <div className="flex flex-col items-center mt-24 sm:mt-28 md:mt-32 xl:mt-18 gap-2 px-4 sm:px-6">
+      <div
+        className={`flex flex-col items-center mt-24 sm:mt-28 md:mt-32 xl:mt-18 gap-2 px-4 sm:px-6 transition-all duration-300 ${
+          openDialog ? "blur-md pointer-events-none select-none" : ""
+        }`}
+      >
         <h2 className="font-bold text-2xl sm:text-3xl md:text-4xl text-center">
           {LookUp.HERO_HEADING}
         </h2>
@@ -70,20 +82,25 @@ function Hero() {
           <p className="text-gray-400 text-center">
             or start a blank app with your favorite stack
           </p>
-          <div className="flex gap-4 mt-5">
-            <SiAstro className="w-8 h-8 text-gray-400 hover:text-blue-300" />
-            <SiVite className="w-8 h-8 text-gray-400 hover:text-blue-300" />
-            <RiNextjsFill className="w-8 h-8 text-gray-400 hover:text-blue-300" />
-            <SiNuxtdotjs className="w-8 h-8 text-gray-400 hover:text-blue-300" />
-            <FaVuejs className="w-8 h-8 text-gray-400 hover:text-blue-300" />
-            <RiSvelteFill className="w-8 h-8 text-gray-400 hover:text-blue-300" />
-            <SiTypescript className="w-8 h-8 text-gray-400 hover:text-blue-300" />
-            <FaReact className="w-8 h-8 text-gray-400 hover:text-blue-300" />
-            <SiQwik className="w-8 h-8 text-gray-400 hover:text-blue-300" />
-            <FaAngular className="w-8 h-8 text-gray-400 hover:text-blue-300" />
+          <div className="md:flex grid grid-cols-5 gap-4 mt-5">
+            <SiAstro className="w-8 h-8 text-amber-600" />
+            <SiVite className="w-8 h-8 text-blue-400" />
+            <RiNextjsFill className="w-8 h-8 text-gray-400" />
+            <SiNuxtdotjs className="w-8 h-8 text-emerald-500 " />
+            <FaReact className="w-8 h-8 text-cyan-400 " />
+            <IoLogoJavascript className="w-8 h-8 text-yellow-400 " />
+            <RiSvelteFill className="w-8 h-8 text-orange-600 " />
+            <SiTypescript className="w-8 h-8 text-sky-600 " />
+            <SiQwik className="w-8 h-8 text-violet-500 " />
+            <FaAngular className="w-8 h-8 text-red-400 " />
           </div>
         </div>
       </div>
+
+      <SignInDialog
+        openDialog={openDialog}
+        closeDialog={(v) => setOpenDialog(v)}
+      />
     </>
   );
 }
