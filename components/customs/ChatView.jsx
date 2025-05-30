@@ -6,7 +6,7 @@ import Colors from "@/data/Colors";
 import LookUp from "@/data/LookUp";
 import Prompt from "@/data/Prompt";
 import axios from "axios";
-import { useConvex } from "convex/react";
+import { useConvex, useMutation } from "convex/react";
 import { ArrowRight, Link } from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
@@ -20,7 +20,8 @@ function ChatView() {
   const { userDetail } = useContext(UserDetailContext);
   const { messages, setMessages } = useContext(MessagesContext);
   const [userInput, setUserInput] = useState();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const UpdateMessages = useMutation(api.workspace.UpdateMessages);
   useEffect(() => {
     id && GetWorkspaceData();
   }, [id]);
@@ -38,7 +39,7 @@ function ChatView() {
     if (messages?.length > 0) {
       const role = messages[messages?.length - 1].role;
       if (role == "user") {
-        // GetAiResponse();
+        GetAiResponse();
       }
     }
   }, [messages]);
@@ -49,14 +50,27 @@ function ChatView() {
     const result = await axios.post("/api/ai-chat", {
       prompt: PROMPT,
     });
+    const aiResp = {
+      role: "ai",
+      content: result.data.result,
+    };
+    setMessages((prev) => [...prev, aiResp]);
+    await UpdateMessages({
+      messages: [...messages, aiResp], // Update messages
+      workspaceId: id,
+    });
+    setLoading(false);
+  };
+
+  const onGenerate = (input) => {
     setMessages((prev) => [
       ...prev,
       {
-        role: "ai",
-        content: result.data.result,
+        role: "user",
+        content: input,
       },
     ]);
-    setLoading(false);
+    setUserInput("");
   };
 
   return (
@@ -66,7 +80,7 @@ function ChatView() {
           {messages?.map((msg, index) => (
             <div
               key={index}
-              className="p-3 rounded-lg mb-2 flex gap-3 items-center"
+              className="p-3 rounded-lg mb-2 flex gap-3 items-center leading-7"
               style={{
                 backgroundColor: Colors.CHAT_BACKGROUND,
               }}
@@ -90,7 +104,12 @@ function ChatView() {
             </div>
           ))}
           {loading && (
-            <div className="p-3 rounded-lg md:mt-5 gap-2 flex items-center justify-center">
+            <div
+              className="p-3 rounded-lg md:mt-2 gap-2 flex items-center justify-center"
+              style={{
+                backgroundColor: Colors.CHAT_BACKGROUND,
+              }}
+            >
               <LuLoaderPinwheel className="animate-spin w-6 h-6" />
               <h2 className="animate-pulse">Generating reponse...</h2>
             </div>
@@ -105,6 +124,7 @@ function ChatView() {
         >
           <div className="flex flex-col sm:flex-row gap-2">
             <textarea
+              value={userInput}
               onChange={(event) => setUserInput(event.target.value)}
               placeholder={LookUp.INPUT_PLACEHOLDER}
               className="outline-none bg-transparent w-full h-32 max-h-56 resize-none text-sm"
