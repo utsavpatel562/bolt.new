@@ -129,7 +129,7 @@
   border-radius: 10px;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #3b82f6; /* Tailwind blue-500 */
+  background-color: #444546; /* Tailwind blue-500 */
   border-radius: 10px;
 }
 .custom-scrollbar::-webkit-scrollbar-track {

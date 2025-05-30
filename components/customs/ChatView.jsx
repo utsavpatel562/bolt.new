@@ -10,6 +10,8 @@ import { useConvex } from "convex/react";
 import { ArrowRight, Link } from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
+import ReactMarkdown from "react-markdown";
+import { LuLoaderPinwheel } from "react-icons/lu";
 import React, { useContext, useEffect, useState } from "react";
 
 function ChatView() {
@@ -18,6 +20,7 @@ function ChatView() {
   const { userDetail } = useContext(UserDetailContext);
   const { messages, setMessages } = useContext(MessagesContext);
   const [userInput, setUserInput] = useState();
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     id && GetWorkspaceData();
   }, [id]);
@@ -35,12 +38,13 @@ function ChatView() {
     if (messages?.length > 0) {
       const role = messages[messages?.length - 1].role;
       if (role == "user") {
-        GetAiResponse();
+        // GetAiResponse();
       }
     }
   }, [messages]);
 
   const GetAiResponse = async () => {
+    setLoading(true);
     const PROMPT = JSON.stringify(messages) + Prompt.CHAT_PROMPT;
     const result = await axios.post("/api/ai-chat", {
       prompt: PROMPT,
@@ -52,6 +56,7 @@ function ChatView() {
         content: result.data.result,
       },
     ]);
+    setLoading(false);
   };
 
   return (
@@ -75,9 +80,21 @@ function ChatView() {
                   className="rounded-full"
                 />
               )}
-              <h2 className="text-justify">{msg.content}</h2>
+              <div className="chat-response prose max-w-full text-sm whitespace-pre-wrap">
+                {msg.role === "ai" ? (
+                  <ReactMarkdown>{msg.content}</ReactMarkdown>
+                ) : (
+                  <p>{msg.content}</p>
+                )}
+              </div>
             </div>
           ))}
+          {loading && (
+            <div className="p-3 rounded-lg md:mt-5 gap-2 flex items-center justify-center">
+              <LuLoaderPinwheel className="animate-spin w-6 h-6" />
+              <h2 className="animate-pulse">Generating reponse...</h2>
+            </div>
+          )}
         </div>
         {/* INPUT */}
         <div
