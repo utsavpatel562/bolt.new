@@ -1,19 +1,27 @@
 import ChatView from "@/components/customs/ChatView";
 import CodeView from "@/components/customs/CodeView";
-import React, { useContext } from "react";
+import React from "react";
 
 function Workspace() {
   return (
-    <>
-      <div className="md:p-7">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+    <div className="p-3 md:p-7">
+      {" "}
+      {/*  Add padding for smaller screens */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-10">
+        {" "}
+        {/*  Responsive spacing */}
+        <div className="order-2 md:order-1">
+          {" "}
+          {/*  Show ChatView below CodeView on mobile */}
           <ChatView />
-          <div className="col-span-3">
-            <CodeView />
-          </div>
+        </div>
+        <div className="col-span-1 md:col-span-3 order-1 md:order-2">
+          {" "}
+          {/* CodeView comes first on mobile */}
+          <CodeView />
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
