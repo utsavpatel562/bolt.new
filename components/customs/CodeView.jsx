@@ -7,9 +7,11 @@ import {
   SandpackPreview,
   SandpackFileExplorer,
 } from "@codesandbox/sandpack-react";
+import LookUp from "@/data/LookUp";
 
 function CodeView() {
   const [activeTab, setActiveTab] = useState("code");
+  const [files, setFiles] = useState(LookUp?.DEFAULT_FILE);
   return (
     <>
       <div>
@@ -37,11 +39,33 @@ function CodeView() {
             </h2>
           </div>
         </div>
-        <SandpackProvider template="react" theme={"dark"}>
+        <SandpackProvider
+          files={files}
+          template="react"
+          theme={"dark"}
+          customSetup={{
+            dependencies: {
+              ...LookUp.DEPENDANCY,
+            },
+          }}
+          options={{
+            externalResources: ["https://cdn.tailwindcss.com"],
+          }}
+        >
           <SandpackLayout>
-            <SandpackFileExplorer style={{ height: "74vh" }} />
-            <SandpackCodeEditor style={{ height: "74vh" }} />
-            <SandpackPreview style={{ height: "74vh" }} />
+            {activeTab == "code" ? (
+              <>
+                <SandpackFileExplorer style={{ height: "74vh" }} />
+                <SandpackCodeEditor style={{ height: "74vh" }} />
+              </>
+            ) : (
+              <>
+                <SandpackPreview
+                  style={{ height: "74vh" }}
+                  showNavigator={true}
+                />
+              </>
+            )}
           </SandpackLayout>
         </SandpackProvider>
       </div>

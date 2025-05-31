@@ -33,14 +33,13 @@ export default {
 </html>`,
     },
     "/App.css": {
-      code: `
-            @tailwind base;
+      code: ` @tailwind base;
 @tailwind components;
 @tailwind utilities;`,
     },
     "/tailwind.config.js": {
       code: `
-            /** @type {import('tailwindcss').Config} */
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
