@@ -2,12 +2,15 @@
 import { UserDetailContext } from "@/context/UserDetailContext";
 import { api } from "@/convex/_generated/api";
 import { useConvex } from "convex/react";
+import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
+import { useSidebar } from "../ui/sidebar";
 
 function WorkspaceHistory() {
   const { userDetail, setUserDetail } = useContext(UserDetailContext);
   const convex = useConvex();
   const [workspaceList, setWorkspaceList] = useState();
+  const { toggleSideBar } = useSidebar();
   useEffect(() => {
     userDetail && GetAllWorkspace();
   }, [userDetail]);
@@ -25,7 +28,14 @@ function WorkspaceHistory() {
         <div>
           {workspaceList &&
             workspaceList?.map((workspace, index) => (
-              <h2 key={index}>{workspace?.messages[0]?.content}</h2>
+              <a href={"/workspace/" + workspace?._id} key={index}>
+                <h2
+                  onClick={toggleSideBar}
+                  className="text-sm text-gray-400 mt-2 font-light hover:text-white"
+                >
+                  {workspace?.messages[0]?.content}
+                </h2>
+              </a>
             ))}
         </div>
       </div>
