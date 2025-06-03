@@ -25,7 +25,7 @@ function Header() {
 
       {/* Header */}
       <div
-        className={`p-4 flex justify-between items-center relative z-40 transition-all duration-300 ${
+        className={`p-4 flex justify-between items-center z-40 transition-all duration-300 ${
           openDialog ? "blur-sm pointer-events-none select-none" : ""
         }`}
       >

@@ -8,7 +8,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { useConvex } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import CustomSidebar from "@/components/customs/CustomSidebar";
+import { AppSidebar } from "@/components/customs/CustomSidebar";
 function Provider({ children }) {
   const [messages, setMessages] = useState();
   const [userDetail, setUserDetail] = useState();
@@ -45,7 +45,8 @@ function Provider({ children }) {
               >
                 <Header />
                 <SidebarProvider>
-                  <CustomSidebar />
+                  <AppSidebar />
+                  <SidebarTrigger />
                   {children}
                 </SidebarProvider>
               </NextThemesProvider>
