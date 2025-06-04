@@ -44,10 +44,7 @@ function Provider({ children }) {
                 disableTransitionOnChange
               >
                 <Header />
-                <SidebarProvider defaultOpen={false}>
-                  <AppSidebar />
-                  {children}
-                </SidebarProvider>
+                {children}
               </NextThemesProvider>
             </MessagesContext.Provider>
           </UserDetailContext.Provider>

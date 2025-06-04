@@ -76,7 +76,7 @@ function ChatView() {
   return (
     <>
       <div className="relative h-[82vh] flex flex-col">
-        <div className="flex-1 overflow-y-scroll custom-scrollbar md:ml-10 rounded-lg">
+        <div className="flex-1 overflow-y-scroll custom-scrollbar rounded-lg">
           {messages?.map((msg, index) => (
             <div
               key={index}
@@ -116,39 +116,40 @@ function ChatView() {
           )}
         </div>
         {/* INPUT */}
-        <div className="flex gap-2 items-end">
+        {/* <div className="flex gap-2 items-end">
           {userDetail && (
             <Image
-              className="rounded-full"
+              onClick={toogleSidebar}
+              className="rounded-full cursor-pointer"
               src={userDetail?.picture}
               alt="user"
               width={30}
               height={30}
             />
-          )}
-          <div
-            className="p-4 sm:p-5 border rounded-xl w-full max-w-xl mt-3"
-            style={{
-              backgroundColor: Colors.BACKGROUND,
-            }}
-          >
-            <div className="flex flex-col sm:flex-row gap-2">
-              <textarea
-                value={userInput}
-                onChange={(event) => setUserInput(event.target.value)}
-                placeholder={LookUp.INPUT_PLACEHOLDER}
-                className="outline-none bg-transparent w-full h-32 max-h-56 resize-none text-sm"
+          )}*/}
+
+        <div
+          className="p-4 sm:p-5 border rounded-xl w-full max-w-xl mt-3"
+          style={{
+            backgroundColor: Colors.BACKGROUND,
+          }}
+        >
+          <div className="flex flex-col sm:flex-row gap-2">
+            <textarea
+              value={userInput}
+              onChange={(event) => setUserInput(event.target.value)}
+              placeholder={LookUp.INPUT_PLACEHOLDER}
+              className="outline-none bg-transparent w-full h-32 max-h-56 resize-none text-sm"
+            />
+            {userInput && (
+              <ArrowRight
+                onClick={() => onGenerate(userInput)}
+                className="bg-blue-400 p-2 h-9 w-9 rounded-md cursor-pointer self-end sm:self-auto"
               />
-              {userInput && (
-                <ArrowRight
-                  onClick={() => onGenerate(userInput)}
-                  className="bg-blue-400 p-2 h-9 w-9 rounded-md cursor-pointer self-end sm:self-auto"
-                />
-              )}
-            </div>
-            <div className="mt-2 sm:mt-1">
-              <Link className="h-5 w-5 cursor-pointer" />
-            </div>
+            )}
+          </div>
+          <div className="mt-2 sm:mt-1">
+            <Link className="h-5 w-5 cursor-pointer" />
           </div>
         </div>
       </div>
