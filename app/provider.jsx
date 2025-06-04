@@ -44,9 +44,8 @@ function Provider({ children }) {
                 disableTransitionOnChange
               >
                 <Header />
-                <SidebarProvider>
+                <SidebarProvider defaultOpen={false}>
                   <AppSidebar />
-                  <SidebarTrigger />
                   {children}
                 </SidebarProvider>
               </NextThemesProvider>

@@ -4,7 +4,7 @@ import React from "react";
 
 function Workspace() {
   return (
-    <div className="p-3 md:p-7">
+    <div className="p-3 pr-10 md:p-7">
       {" "}
       {/*  Add padding for smaller screens */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-10">
