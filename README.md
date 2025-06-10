@@ -1,5 +1,5 @@
 ### BOLT.NEW CLONE
-A powerful and elegant Blot.new] built using modern full-stack technologies. This project leverages Google Gemini for AI assistance, Sandpack for live Markdown preview, and integrates secure Google authentication.
+A powerful and elegant Blot.new built using modern full-stack technologies. This project leverages Google Gemini for AI assistance, Sandpack for live Markdown preview, and integrates secure Google authentication.
 
 <img src="public/demo.png" alt="demo"/>
 
